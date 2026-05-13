@@ -269,6 +269,9 @@ DATABASES = {
 default=os.getenv('DATABASE_URL')
 )
 }**
+### Entity Relationship Diagram (ERD)
+
+![ER_diagram](screenshort/ER_diagram.jpg)
 
 ## Authentication
 
@@ -407,6 +410,9 @@ docstring
 
 light house report**
 
+### light house report**
+
+![LightHouse_Report](screenshort/lighthouse.png)
 ## References
 
 - [Django Official Website](https://www.djangoproject.com)  
@@ -426,3 +432,6 @@ light house report**
 
 - [DOAB Books Directory](https://directory.doabooks.org)  
   Open-access book dataset used in this project.
+
+- [Django Blog Source Code](https://github.com/Code-Institute-Solutions/django-blog-sourcecode/tree/main)  
+  Used as a reference for Django development patterns and implementation.
