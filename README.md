@@ -10,6 +10,7 @@ including managing the book catalog, organizing authors and categories,
 handling user accounts, and processing book transactions. Regular users can
 browse the catalog, view detailed book information, borrow available books,
 request renewals, and track their borrowing history.
+
 The application implements role-based access control, ensuring that only
 authorized staff members can perform specific operations like issuing or
 returning books. This enhances both security and operational reliability.
@@ -18,6 +19,7 @@ Bootstrap, providing a clean and user-friendly experience across different
 devices. With support for pagination, search, and filtering (by ISBN, title,
 and author), the platform is designed to handle larger datasets efficiently and
 improve usability.
+
 The system also integrates Cloudinary for efficient cloud-based media storage
 and delivery.
 Overall, the system aims to reduce manual workload, improve record accuracy,
