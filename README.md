@@ -483,15 +483,11 @@ quick manual verification of frontend changes before releasing.
 
 **w3c
 
-css
+### css validator
+![css_validation](screenshort/css_validator.png)
 
-python
 
-docstring
-
-light house report**
-
-### light house report**
+### Light house report
 
 ![LightHouse_Report](screenshort/lighthouse.png)
 ## References
