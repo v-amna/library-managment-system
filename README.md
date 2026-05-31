@@ -218,10 +218,10 @@ helps users manage deadlines effectively.
 The application is built using Django’s MVT (Model–View–Template) architectural
 pattern, which is conceptually similar to the traditional MVC pattern.
 
-### MVC vs Django (MVT Mapping)
+### MVC in Django
 
 MVC Component Django Equivalent Description
-Model Model Handles database structure and data logic
+Model Handles database structure and data logic
 View Template Responsible for UI and presentation layer
 Controller View Contains business logic and request handling
 
@@ -270,7 +270,7 @@ They:
 The application uses PostgreSQL as the primary database in production,
 providing better performance, scalability, and reliability compared to SQLite.
 
-### Development vs Production
+### Development and Production
 
     • Development: SQLite (default Django database for simplicity)
     • Production: PostgreSQL (via Heroku Postgres)
@@ -299,7 +299,7 @@ DATABASES = {
 }
 ```
 
-### Wire Frames
+### Wireframe designs
 ![homepage_design](screenshots/wire%20frame/w_homepage.png)
 ![signin_page_design](screenshots/wire%20frame/w_signin.png)
 ![signup_page_design](screenshots/wire%20frame/w_signup.png)
@@ -369,7 +369,7 @@ clearly. Examples:
 
 ## Installation
 
-### 1. Clone the Repository:-
+### 1. Clone the Repository
 
     git clone https://github.com/your-username/library-management.git
     cd library-management
@@ -512,7 +512,7 @@ running automated tests or user acceptance testing.
 Manual testing checklist
 
 - Environments & tools
-    - Test in latest stable Chrome, Firefox, and an up-to-date mobile browser
+    - Test in the latest stable Chrome, Firefox, and an up-to-date mobile browser
       (Safari or Chrome on Android). Use browser devtools to simulate mobile
       devices and different network conditions.
     - Verify static assets (CSS/JS) load correctly and image uploads are
@@ -526,11 +526,11 @@ Manual testing checklist
       back/forward browser navigation behaves as expected.
 
 - Forms & validation
-    - Test sign up, login, add/edit book, add/edit author/category, and borrow
+    - Test sign up, login, add/edit a book, add/edit author/category, and borrow
       request forms with valid and invalid inputs. Ensure client- and
       server-side validation messages are clear and focus is returned to the
       first invalid field.
-    - Verify file upload fields (cover images) accept expected file types and
+    - Verify file upload fields (cover images), accept expected file types, and
       show previews or success messages when appropriate.
     - **Async Username Validation on Signup**: During the signup process,
       username
@@ -552,7 +552,7 @@ Manual testing checklist
 
 - Responsiveness & layout
     - Resize the viewport and test common breakpoints (mobile, tablet,
-      desktop). Verify grid/list views, forms and modals adapt without
+      desktop). Verify grid/list views, forms, and modals adapt without
       overlap or overflow.
 
 - Accessibility & usability
@@ -562,22 +562,22 @@ Manual testing checklist
 
 - Visual QA
     - Confirm wireframe design is matching the rendered
-      UI where relevant. Look for spacing, layout and alignment regressions.
+      UI where relevant. Look for spacing, layout, and alignment regressions.
 
 Record results, steps to reproduce any issues, and include screenshots or
 browser console logs when reporting bugs. This checklist is intended for
 quick manual verification of frontend changes before releasing.
 
-## Validators testing(to-do)
+## Validators and Lighthouse reports
 
-### w3c
+### W3C Validator
 ![html_validation](screenshots/w3c_Validator.png)
 
-### css validator
+### CSS Validator
 
 ![css_validation](screenshots/css_validator.png)
 
-### Light house report
+### Lighthouse report
 
 ![LightHouse_Report](screenshots/lighthouse.png)
 
