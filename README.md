@@ -563,7 +563,8 @@ quick manual verification of frontend changes before releasing.
 
 ## Validators testing(to-do)
 
-**w3c
+### w3c
+![html_validation](screenshort/w3c_Validator.png)
 
 ### css validator
 
