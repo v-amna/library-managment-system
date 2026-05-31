@@ -299,6 +299,13 @@ DATABASES = {
 }
 ```
 
+### Wire Frames
+![homepage_design](screenshort/wire%20frame/w_homepage.png)
+![signin_page_design](screenshort/wire%20frame/w_signin.png)
+![signup_page_design](screenshort/wire%20frame/w_signup.png)
+![searchbook_design](screenshort/wire%20frame/w_searchbook.png)
+![my_borows_design](screenshort/wire%20frame/w_borrows.png)
+
 ### Entity Relationship Diagram (ERD)
 
 ![ER_diagram](screenshort/ER_diagram.jpg)
