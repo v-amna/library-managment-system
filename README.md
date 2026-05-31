@@ -150,6 +150,7 @@ During the signup process, the system performs real-time async validation of
 the username field. As users enter a username, the system automatically checks
 if it's available in the database without requiring a page refresh or form
 submission. This validation:
+
 - Checks for username availability in real-time
 - Provides instant feedback if the username is already taken
 - Prevents duplicate username registration errors
@@ -284,16 +285,17 @@ like Heroku via config vars. Example database configuration from
 
 ```python
 import os
+
 DATABASES = {
-  'default': {
-    "ENGINE": "django.db.backends.postgresql",
-    "NAME": os.environ.get("POSTGRES_DB_NAME"),
-    "USER": os.environ.get("POSTGRES_DB_USERNAME"),
-    "PASSWORD": os.environ.get("POSTGRES_DB_PASSWORD"),
-    "HOST": os.environ.get("POSTGRES_DB_HOST"),
-    "PORT": "5432",
-    'OPTIONS': {'sslmode': 'require'},
-  }
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_DB_NAME"),
+        "USER": os.environ.get("POSTGRES_DB_USERNAME"),
+        "PASSWORD": os.environ.get("POSTGRES_DB_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_DB_HOST"),
+        "PORT": "5432",
+        'OPTIONS': {'sslmode': 'require'},
+    }
 }
 ```
 
@@ -388,9 +390,84 @@ clearly. Examples:
     python manage.py runserver
     Visit: http://127.0.0.1:8000/
 
+## Deployment process
+
+This application is hosted on Heroku. Deployments are performed manually after
+merging changes into the `main` branch and pushing `main` to GitHub. Below is a
+brief, repeatable workflow you can follow.
+
+1. Prepare the repository
+    - Ensure `requirements.txt`, `Procfile` (and optionally `runtime.txt`) are
+      present.
+    - Confirm `config/settings.py` reads sensitive values from environment
+      variables (SECRET_KEY, database credentials, Cloudinary keys, etc.).
+
+2. Push changes to GitHub
+
+    ```bash
+    git checkout main
+    git merge <feature-branch>
+    git push origin main
+    ```
+3. Deploy to Heroku
+
+    - Option A — Heroku Dashboard (recommended for manual deployments)
+        - Go to your app on the Heroku Dashboard → Deploy → Connect to GitHub →
+          search and connect the repo.
+        - Choose the `main` branch and click "Deploy Branch" for a manual 
+          deployment (or enable Automatic deploys for continuous deployments).
+
+    - Option B — Heroku CLI
+      ```bash
+      heroku git:remote -a <HEROKU_APP_NAME>
+      git push heroku main
+      ```
+
+4. Post-deploy tasks
+
+    ```bash
+    # Run database migrations
+    heroku run python manage.py migrate -a <HEROKU_APP_NAME>
+
+    # Collect static files (if required by your static setup)
+    heroku run python manage.py collectstatic --noinput -a <HEROKU_APP_NAME>
+
+    # Create a superuser if needed
+    heroku run python manage.py createsuperuser -a <HEROKU_APP_NAME>
+    ```
+
+5. Configuration & environment variables
+    - Set production config vars in Heroku (Settings → Config Vars) or via the
+      CLI:
+        - `SECRET_KEY`
+        - Database credentials (Heroku Postgres is recommended — provision via
+          the Add-ons tab)
+        - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`,
+          `CLOUDINARY_API_SECRET` (used for media uploads)
+        - Any other keys referenced in `config/settings.py`.
+
+6. Logs & troubleshooting
+
+    ```bash
+    heroku logs --tail -a <HEROKU_APP_NAME>
+    ```
+
+7. Rollbacks
+    - Use the Heroku Dashboard (Activity → Revert) or the CLI to roll back to a
+      previous release if needed.
+
+Notes
+
+- Make sure `DEBUG=False` in production and your `ALLOWED_HOSTS` includes the
+  Heroku app domain.
+- This project uses Cloudinary for media; ensure its environment variables are
+  set on Heroku before deploying.
+
 ## Automated Testing (tests.py)
 
-    Unit tests and basic integration tests have been written to validate core functionalities, including:
+Unit tests and basic integration tests have been written to validate 
+core functionalities, including:
+
     • Book creation, update, and deletion
     • Author and category management
     • User-related operations
@@ -399,22 +476,24 @@ clearly. Examples:
 
 ### Permission Testing
 
-    Tests verify that role-based permissions are enforced correctly:
+Tests verify that role-based permissions are enforced correctly:
     • Only staff users can issue, return, or renew books
     • Regular users are restricted from admin-level actions
 
 ### Workflow Testing
 
-    Key system workflows are tested to ensure proper behavior:
+Key system workflows are tested to ensure proper behavior:
     • Issuing a book updates availability and creates a record
     • Returning a book updates status and restores availability
     • Renewing a book correctly extends the due date
 
 ### Running Tests
 
-    To execute the test suite, run:
-     python manage.py test
-    This will automatically discover and run all test cases defined in tests.py.
+To execute the test suite, run:
+```bash
+python manage.py test
+```
+This will automatically discover and run all test cases defined in tests.py.
 
 ### Manual Testing of User Interface (UI)
 
@@ -426,54 +505,57 @@ running automated tests or user acceptance testing.
 Manual testing checklist
 
 - Environments & tools
-  - Test in latest stable Chrome, Firefox, and an up-to-date mobile browser
-    (Safari or Chrome on Android). Use browser devtools to simulate mobile
-    devices and different network conditions.
-  - Verify static assets (CSS/JS) load correctly and image uploads are
-    served via Cloudinary in production-like environments.
+    - Test in latest stable Chrome, Firefox, and an up-to-date mobile browser
+      (Safari or Chrome on Android). Use browser devtools to simulate mobile
+      devices and different network conditions.
+    - Verify static assets (CSS/JS) load correctly and image uploads are
+      served via Cloudinary in production-like environments.
 
 - Pages & navigation
-  - Confirm header, footer, and primary navigation display and behave
-    consistently across pages (home, book list, book detail, staff views,
-    user account pages).
-  - Validate links and buttons navigate to the correct routes and that
-    back/forward browser navigation behaves as expected.
+    - Confirm header, footer, and primary navigation display and behave
+      consistently across pages (home, book list, book detail, staff views,
+      user account pages).
+    - Validate links and buttons navigate to the correct routes and that
+      back/forward browser navigation behaves as expected.
 
 - Forms & validation
-  - Test sign up, login, add/edit book, add/edit author/category, and borrow
-    request forms with valid and invalid inputs. Ensure client- and
-    server-side validation messages are clear and focus is returned to the
-    first invalid field.
-  - Verify file upload fields (cover images) accept expected file types and
-    show previews or success messages when appropriate.
-  - **Async Username Validation on Signup**: During the signup process, username
-    validation is performed asynchronously in real-time as the user types.
-    The system checks if the username is already taken without requiring a full
-    form submission. If the username is unavailable, an error message is
-    displayed immediately, allowing users to choose an alternative username
-    before completing registration. This provides instant feedback and improves
-    the user experience by preventing form submission errors related to
-    duplicate usernames.
+    - Test sign up, login, add/edit book, add/edit author/category, and borrow
+      request forms with valid and invalid inputs. Ensure client- and
+      server-side validation messages are clear and focus is returned to the
+      first invalid field.
+    - Verify file upload fields (cover images) accept expected file types and
+      show previews or success messages when appropriate.
+    - **Async Username Validation on Signup**: During the signup process,
+      username
+      validation is performed asynchronously in real-time as the user types.
+      The system checks if the username is already taken without requiring a
+      full
+      form submission. If the username is unavailable, an error message is
+      displayed immediately, allowing users to choose an alternative username
+      before completing registration. This provides instant feedback and
+      improves
+      the user experience by preventing form submission errors related to
+      duplicate usernames.
 
 - Borrow/Issue/Return flows
-  - Walk through user borrow request and staff issue/approve/return/renew
-    flows. Check that availability counters update and UI states (pending,
-    issued, returned, renewed) are rendered correctly in lists and detail
-    pages.
+    - Walk through user borrow request and staff issue/approve/return/renew
+      flows. Check that availability counters update and UI states (pending,
+      issued, returned, renewed) are rendered correctly in lists and detail
+      pages.
 
 - Responsiveness & layout
-  - Resize the viewport and test common breakpoints (mobile, tablet,
-    desktop). Verify grid/list views, forms and modals adapt without
-    overlap or overflow.
+    - Resize the viewport and test common breakpoints (mobile, tablet,
+      desktop). Verify grid/list views, forms and modals adapt without
+      overlap or overflow.
 
 - Accessibility & usability
-  - Verify keyboard navigation works for forms and interactive elements.
-  - Check color contrast for primary UI elements and ensure images have
-    meaningful alt text where applicable.
+    - Verify keyboard navigation works for forms and interactive elements.
+    - Check color contrast for primary UI elements and ensure images have
+      meaningful alt text where applicable.
 
 - Visual QA
-  - Confirm wireframe design is matching the rendered
-    UI where relevant. Look for spacing, layout and alignment regressions.
+    - Confirm wireframe design is matching the rendered
+      UI where relevant. Look for spacing, layout and alignment regressions.
 
 Record results, steps to reproduce any issues, and include screenshots or
 browser console logs when reporting bugs. This checklist is intended for
@@ -484,12 +566,13 @@ quick manual verification of frontend changes before releasing.
 **w3c
 
 ### css validator
-![css_validation](screenshort/css_validator.png)
 
+![css_validation](screenshort/css_validator.png)
 
 ### Light house report
 
 ![LightHouse_Report](screenshort/lighthouse.png)
+
 ## References
 
 - [Django Official Website](https://www.djangoproject.com)
