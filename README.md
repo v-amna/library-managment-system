@@ -147,7 +147,7 @@ During the signup process, the system performs real-time async validation of
 the username field. As users enter a username, the system automatically checks
 if it's available in the database without requiring a page refresh or form
 submission. This validation:
-- Checks for username availability in real-time 
+- Checks for username availability in real-time
 - Provides instant feedback if the username is already taken
 - Prevents duplicate username registration errors
 - Improves user experience by catching conflicts early
@@ -180,7 +180,7 @@ date.
 
 ### Cancel the borrow request
 
-Before the staff issues the book, the user can cancel the request. Using the 
+Before the staff issues the book, the user can cancel the request. Using the
 "my borrows" page.
 
 ![Borrow_book](screenshort/user/user_waiting_approval.png)
@@ -203,8 +203,8 @@ helps users manage deadlines effectively.
 ## Tech Stack
 
     • Backend: Django (Python),Pycharm
-    • Frontend: HTML, CSS, Bootstrap 
-    • Database: PostgreSQL(dbeaver) 
+    • Frontend: HTML, CSS, Bootstrap
+    • Database: PostgreSQL(dbeaver)
     • Authentication: Django’s built-in authentication system
 
 ### Architecture (Django MVT Pattern)
@@ -253,10 +253,10 @@ They:
 
 ### Request Flow
 
-    1. User sends a request (e.g., view books) 
-    2. URL routes the request to a Django view 
-    3. View processes logic and interacts with models 
-    4. Data is passed to a template 
+    1. User sends a request (e.g., view books)
+    2. URL routes the request to a Django view
+    3. View processes logic and interacts with models
+    4. Data is passed to a template
     5. Template renders the final HTML response
 
 ## Database
@@ -266,25 +266,32 @@ providing better performance, scalability, and reliability compared to SQLite.
 
 ### Development vs Production
 
-    • Development: SQLite (default Django database for simplicity) 
-    • Production: PostgreSQL (via Heroku Postgres) 
+    • Development: SQLite (default Django database for simplicity)
+    • Production: PostgreSQL (via Heroku Postgres)
 
 ### Configuration
 
-Database configuration is handled using dj-database-url, which allows seamless
-switching between environments using the DATABASE_URL environment variable
-provided by Heroku.
-Example configuration in settings.py:
+Database settings are defined in `config/settings.py` and are read from
+environment variables. This lets you keep sensitive credentials out of the
+repository and makes it easy to configure the application on hosting platforms
+like Heroku via config vars. Example database configuration from
+`settings.py`:
 
-**import dj_database_url**
-
-**import os
-
+```python
+import os
 DATABASES = {
-'default': dj_database_url.config(
-default=os.getenv('DATABASE_URL')
-)
-}**
+  'default': {
+    "ENGINE": "django.db.backends.postgresql",
+    "NAME": os.environ.get("POSTGRES_DB_NAME"),
+    "USER": os.environ.get("POSTGRES_DB_USERNAME"),
+    "PASSWORD": os.environ.get("POSTGRES_DB_PASSWORD"),
+    "HOST": os.environ.get("POSTGRES_DB_HOST"),
+    "PORT": "5432",
+    'OPTIONS': {'sslmode': 'require'},
+  }
+}
+```
+
 ### Entity Relationship Diagram (ERD)
 
 ![ER_diagram](screenshort/ER_diagram.jpg)
@@ -295,10 +302,10 @@ The application uses Django’s built-in authentication system to handle user
 registration, login, and access control.
 It provides:
 
-    • User Registration & Login: Secure authentication for users and staff 
-    • Password Management: Password hashing and validation handled by Django 
-    • Session Management: Maintains user sessions after login 
-    • Role-Based Access: Differentiates between admin/staff and regular users 
+    • User Registration & Login: Secure authentication for users and staff
+    • Password Management: Password hashing and validation handled by Django
+    • Session Management: Maintains user sessions after login
+    • Role-Based Access: Differentiates between admin/staff and regular users
     • Permission System: Restricts actions such as issuing, returning, and renewing books to authorized staff only
 
 ## Media File Handling (Cloudinary)
@@ -311,19 +318,19 @@ such as book cover images.
 Cloudinary is integrated into the Django project using environment variables
 for secure configuration:
 
-    • CLOUDINARY_CLOUD_NAME 
-    • CLOUDINARY_API_KEY 
-    • CLOUDINARY_API_SECRET 
+    • CLOUDINARY_CLOUD_NAME
+    • CLOUDINARY_API_KEY
+    • CLOUDINARY_API_SECRET
 
 These credentials are stored in Heroku Config Vars and not exposed in the
 codebase.
 
 ## Future Improvements
 
-    • Email notifications for due dates 
-    • Fine calculation for late returns 
-    • REST API (Django REST Framework) 
-    • Advanced search and filtering 
+    • Email notifications for due dates
+    • Fine calculation for late returns
+    • REST API (Django REST Framework)
+    • Advanced search and filtering
     • Docker deployment
 
 ## Development Methodology (Agile)
@@ -342,8 +349,8 @@ throughout development.
 Features were planned and implemented using user stories to define requirements
 clearly. Examples:
 
-    • As a user, I can browse available books so that I can choose what to borrow 
-    • As an admin, I can manage books so that the catalog stays updated 
+    • As a user, I can browse available books so that I can choose what to borrow
+    • As an admin, I can manage books so that the catalog stays updated
     • As staff, I can issue and return books so that circulation is properly tracked
 
 ## Installation
@@ -356,7 +363,7 @@ clearly. Examples:
 ### 2. Create Virtual Environment
 
     python -m venv venv
-    source venv/bin/activate   
+    source venv/bin/activate
     # On Windows: venv\Scripts\activate
 
 ### 3. Install Dependencies
@@ -379,24 +386,24 @@ clearly. Examples:
 ## Automated Testing (tests.py)
 
     Unit tests and basic integration tests have been written to validate core functionalities, including:
-    • Book creation, update, and deletion 
-    • Author and category management 
-    • User-related operations 
-    • Book issue, return, and renewal workflows 
-    • Validation of business rules (e.g., book availability) 
+    • Book creation, update, and deletion
+    • Author and category management
+    • User-related operations
+    • Book issue, return, and renewal workflows
+    • Validation of business rules (e.g., book availability)
 
 ### Permission Testing
 
     Tests verify that role-based permissions are enforced correctly:
-    • Only staff users can issue, return, or renew books 
-    • Regular users are restricted from admin-level actions 
+    • Only staff users can issue, return, or renew books
+    • Regular users are restricted from admin-level actions
 
 ### Workflow Testing
 
     Key system workflows are tested to ensure proper behavior:
-    • Issuing a book updates availability and creates a record 
-    • Returning a book updates status and restores availability 
-    • Renewing a book correctly extends the due date 
+    • Issuing a book updates availability and creates a record
+    • Returning a book updates status and restores availability
+    • Renewing a book correctly extends the due date
 
 ### Running Tests
 
@@ -484,23 +491,23 @@ light house report**
 ![LightHouse_Report](screenshort/lighthouse.png)
 ## References
 
-- [Django Official Website](https://www.djangoproject.com)  
+- [Django Official Website](https://www.djangoproject.com)
   Core framework documentation and resources.
 
-- [Customize Django Admin](https://testdriven.io/blog/customize-django-admin/#custom-admin-actions)  
+- [Customize Django Admin](https://testdriven.io/blog/customize-django-admin/#custom-admin-actions)
   How to extend and customize admin functionality.
 
-- [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks)  
+- [django-widget-tweaks](https://github.com/jazzband/django-widget-tweaks)
   Template-level form customization library.
 
-- [Reusable Form Templates](https://docs.djangoproject.com/en/5.2/topics/forms/#reusable-form-templates)  
+- [Reusable Form Templates](https://docs.djangoproject.com/en/5.2/topics/forms/#reusable-form-templates)
   Best practices for reusable Django forms.
 
-- [Custom Authentication](https://docs.djangoproject.com/en/6.0/topics/auth/customizing)  
+- [Custom Authentication](https://docs.djangoproject.com/en/6.0/topics/auth/customizing)
   Customizing Django authentication system.
 
-- [DOAB Books Directory](https://directory.doabooks.org)  
+- [DOAB Books Directory](https://directory.doabooks.org)
   Open-access book dataset used in this project.
 
-- [Django Blog Source Code](https://github.com/Code-Institute-Solutions/django-blog-sourcecode/tree/main)  
+- [Django Blog Source Code](https://github.com/Code-Institute-Solutions/django-blog-sourcecode/tree/main)
   Used as a reference for Django development patterns and implementation.
