@@ -141,6 +141,20 @@ Users can **sign up** and **log in** to access the system.
 
 ![user_login](screenshort/user/user_login.png)
 
+### Async Username Validation on Signup
+
+During the signup process, the system performs real-time async validation of
+the username field. As users enter a username, the system automatically checks
+if it's available in the database without requiring a page refresh or form
+submission. This validation:
+- Checks for username availability in real-time 
+- Provides instant feedback if the username is already taken
+- Prevents duplicate username registration errors
+- Improves user experience by catching conflicts early
+- Uses AJAX to communicate with the backend without page reload
+
+TODO: Add screenshot of async validation in action failed and success cases.
+
 ### Browse Available Books
 
 Users can explore the library catalog with a paginated listing of books, making
@@ -390,15 +404,68 @@ clearly. Examples:
      python manage.py test
     This will automatically discover and run all test cases defined in tests.py.
 
-### Manual Testing
+### Manual Testing of User Interface (UI)
 
-In addition to automated tests, manual testing was performed to validate:
+This section describes a manual test plan for the frontend (UI) of the
+application. Use these steps to quickly verify visual correctness, form
+validation, navigation, responsiveness, and basic accessibility before
+running automated tests or user acceptance testing.
 
-• User interface behavior
+Manual testing checklist
 
-• Form handling and validations
+- Environments & tools
+  - Test in latest stable Chrome, Firefox, and an up-to-date mobile browser
+    (Safari or Chrome on Android). Use browser devtools to simulate mobile
+    devices and different network conditions.
+  - Verify static assets (CSS/JS) load correctly and image uploads are
+    served via Cloudinary in production-like environments.
 
-• End-to-end user interactions
+- Pages & navigation
+  - Confirm header, footer, and primary navigation display and behave
+    consistently across pages (home, book list, book detail, staff views,
+    user account pages).
+  - Validate links and buttons navigate to the correct routes and that
+    back/forward browser navigation behaves as expected.
+
+- Forms & validation
+  - Test sign up, login, add/edit book, add/edit author/category, and borrow
+    request forms with valid and invalid inputs. Ensure client- and
+    server-side validation messages are clear and focus is returned to the
+    first invalid field.
+  - Verify file upload fields (cover images) accept expected file types and
+    show previews or success messages when appropriate.
+  - **Async Username Validation on Signup**: During the signup process, username
+    validation is performed asynchronously in real-time as the user types.
+    The system checks if the username is already taken without requiring a full
+    form submission. If the username is unavailable, an error message is
+    displayed immediately, allowing users to choose an alternative username
+    before completing registration. This provides instant feedback and improves
+    the user experience by preventing form submission errors related to
+    duplicate usernames.
+
+- Borrow/Issue/Return flows
+  - Walk through user borrow request and staff issue/approve/return/renew
+    flows. Check that availability counters update and UI states (pending,
+    issued, returned, renewed) are rendered correctly in lists and detail
+    pages.
+
+- Responsiveness & layout
+  - Resize the viewport and test common breakpoints (mobile, tablet,
+    desktop). Verify grid/list views, forms and modals adapt without
+    overlap or overflow.
+
+- Accessibility & usability
+  - Verify keyboard navigation works for forms and interactive elements.
+  - Check color contrast for primary UI elements and ensure images have
+    meaningful alt text where applicable.
+
+- Visual QA
+  - Confirm wireframe design is matching the rendered
+    UI where relevant. Look for spacing, layout and alignment regressions.
+
+Record results, steps to reproduce any issues, and include screenshots or
+browser console logs when reporting bugs. This checklist is intended for
+quick manual verification of frontend changes before releasing.
 
 ## Validators testing(to-do)
 
