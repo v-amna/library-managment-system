@@ -24,9 +24,9 @@ The system also integrates Cloudinary for efficient cloud-based media storage
 and delivery.
 Overall, the system aims to reduce manual workload, improve record accuracy,
 and provide a structured, scalable solution for modern library management.
-![homepage_bigscreen_view](screenshort/Home_page.jpg)
+![homepage_bigscreen_view](screenshots/Home_page.jpg)
 
-![home_page_small_screen_view](screenshort/mobile_view.jpg)
+![home_page_small_screen_view](screenshots/mobile_view.jpg)
 
 ## Features
 
@@ -48,9 +48,9 @@ While adding a **Book**, users can select existing **Authors** and **Categories
 - This flexible workflow allows users to either reuse existing data or create
   and associate new records as needed.
 
-![book_catalog](./screenshort/book/Book_Details_page.png)
+![book_catalog](screenshots/book/Book_Details_page.png)
 
-![add_book_details](screenshort/book/book_add_successfull.png)
+![add_book_details](screenshots/book/book_add_successfull.png)
 
 ### Filter and Search Books
 
@@ -58,28 +58,28 @@ Admins can quickly locate books using filtering and search functionality based
 on ISBN, title (name), or author. This makes it efficient to manage large
 collections and perform updates without manually browsing through all records.
 
-![search_book](screenshort/book/filter_book_category.png)
+![search_book](screenshots/book/filter_book_category.png)
 
-![search_book_details](screenshort/book/search_book_name.png)
+![search_book_details](screenshots/book/search_book_name.png)
 
 ### Manage Book Authors
 
 Staff can create, update, and delete author records. This ensures proper
 organization of books and prevents duplication of author information.
 
-![author_page](screenshort/book/author_page.png)
+![author_page](screenshots/book/author_page.png)
 
-![add_author_details](screenshort/book/add_author_name.png)
+![add_author_details](screenshots/book/add_author_name.png)
 
-![add_successfull](screenshort/book/added_author_successfully.png)
+![add_successfull](screenshots/book/added_author_successfully.png)
 
-![update_author](screenshort/book/author_update.png)
+![update_author](screenshots/book/author_update.png)
 
-![author_delete_process](screenshort/book/author_delete1.png)
+![author_delete_process](screenshots/book/author_delete1.png)
 
-![author_delete_action](screenshort/book/author_delete_action.png)
+![author_delete_action](screenshots/book/author_delete_action.png)
 
-![author_delete_success](screenshort/book/author_delete_sucess.png)
+![author_delete_success](screenshots/book/author_delete_sucess.png)
 
 ### Manage Book Categories
 
@@ -87,19 +87,19 @@ Admins can define and manage book categories (e.g., Fiction, Science,
 Technology), improving organization and making it easier for users to browse
 books.
 
-![category_page](screenshort/book/category_page.png)
+![category_page](screenshots/book/category_page.png)
 
-![categoty_add](screenshort/book/category_add.png)
+![categoty_add](screenshots/book/category_add.png)
 
-![category_added_sucessfully](screenshort/book/category_added_sucessfully.png)
+![category_added_sucessfully](screenshots/book/category_added_sucessfully.png)
 
-![category_update](screenshort/book/category_update.png)
+![category_update](screenshots/book/category_update.png)
 
-![category_updated_successfully](screenshort/book/category_update_successfully.png)
+![category_updated_successfully](screenshots/book/category_update_successfully.png)
 
-![delete_category](screenshort/book/category_delete.png)
+![delete_category](screenshots/book/category_delete.png)
 
-![delete_category_successfully](screenshort/book/category_delete_success.png)
+![delete_category_successfully](screenshots/book/category_delete_success.png)
 
 ### Manage Staff
 
@@ -108,13 +108,13 @@ updating their information, and controlling their access permissions. Staff
 members are responsible for managing books, authors, and categories, as well as
 handling book issuance, renewal, and returns.
 
-![Staff_Page](screenshort/staff_home.png)
+![Staff_Page](screenshots/staff_home.png)
 
-![Add_staff_details](screenshort/staff_add_sucess.png)
+![Add_staff_details](screenshots/staff_add_sucess.png)
 
-![staff_Roles_assigning](screenshort/assign_permission_staff.png)
+![staff_Roles_assigning](screenshots/assign_permission_staff.png)
 
-![staff_delete](screenshort/staff_delete.png)
+![staff_delete](screenshots/staff_delete.png)
 
 ### Issue Books to Users
 
@@ -122,9 +122,9 @@ Staff are responsible for issuing books to users. When a book is issued, the
 system records the issue date and calculates a due date, while also updating
 the number of available copies.
 
-![staff_approve_user](screenshort/staff_request_approvel.png)
+![staff_approve_user](screenshots/staff_request_approvel.png)
 
-![staff_issued_book](screenshort/staff_filter_issued_book.png)
+![staff_issued_book](screenshots/staff_filter_issued_book.png)
 
 ### Approve and Handle Returns & Renewals
 
@@ -132,17 +132,17 @@ Staff oversee the return and renewal process. They can confirm when a book is
 returned (updating availability) and approve renewal requests, extending the
 borrowing period when applicable.
 
-![staff_return](screenshort/staff_filter_returned_book.png)
+![staff_return](screenshots/staff_filter_returned_book.png)
 
-![staff_renewed_bboks](screenshort/staff_filter_renewed.png)
+![staff_renewed_bboks](screenshots/staff_filter_renewed.png)
 
 ## User Features
 
 Users can **sign up** and **log in** to access the system.
 
-![User_sighn_up](screenshort/user/signup_page.png)
+![User_sighn_up](screenshots/user/signup_page.png)
 
-![user_login](screenshort/user/user_login.png)
+![user_login](screenshots/user/user_login.png)
 
 ### Async Username Validation on Signup
 
@@ -157,16 +157,16 @@ submission. This validation:
 - Improves user experience by catching conflicts early
 - Uses AJAX to communicate with the backend without page reload
 
-![](screenshort/user_name_excisting.png)
+![](screenshots/user_name_excisting.png)
 
-![](screenshort/user_name_validation.png)
+![](screenshots/user_name_validation.png)
 
 ### Browse Available Books
 
 Users can explore the library catalog with a paginated listing of books, making
 it easy to navigate through large collections efficiently.
 
-![search_book_details](screenshort/user/user_book_page.png)
+![search_book_details](screenshots/user/user_book_page.png)
 
 ### View Book Details
 
@@ -174,7 +174,7 @@ Each book has a detailed view displaying key information such as title, author,
 ISBN, availability status, and cover image, helping users make informed
 borrowing decisions.
 
-![search_book_details](screenshort/user/user_book_page.png)
+![search_book_details](screenshots/user/user_book_page.png)
 
 ### borrow books
 
@@ -182,21 +182,21 @@ users can request to borrow available books. once approved or processed by
 staff, the book is issued and linked to the user’s account with a defined due
 date.
 
-![Borrow_book](screenshort/user/user_waiting_approval.png)
+![Borrow_book](screenshots/user/user_waiting_approval.png)
 
 ### Cancel the borrow request
 
 Before the staff issues the book, the user can cancel the request. Using the
 "my borrows" page.
 
-![Borrow_book](screenshort/user/user_waiting_approval.png)
+![Borrow_book](screenshots/user/user_waiting_approval.png)
 
 ### Renew Borrowed Books
 
 Users can renew the borrowed books before the due date once without staff,
 Using the "my borrows" page.
 
-![renew_book](screenshort/user/usre_request_renew.png)
+![renew_book](screenshots/user/usre_request_renew.png)
 
 ### Track Borrowing History
 
@@ -204,7 +204,7 @@ Users can view their borrowing history, including issued books, due dates,
 returned items, and current borrowing status. This provides transparency and
 helps users manage deadlines effectively.
 
-![User_borrow_history](screenshort/user/user_borrows_history.png)
+![User_borrow_history](screenshots/user/user_borrows_history.png)
 
 ## Tech Stack
 
@@ -300,15 +300,15 @@ DATABASES = {
 ```
 
 ### Wire Frames
-![homepage_design](screenshort/wire%20frame/w_homepage.png)
-![signin_page_design](screenshort/wire%20frame/w_signin.png)
-![signup_page_design](screenshort/wire%20frame/w_signup.png)
-![searchbook_design](screenshort/wire%20frame/w_searchbook.png)
-![my_borows_design](screenshort/wire%20frame/w_borrows.png)
+![homepage_design](screenshots/wire%20frame/w_homepage.png)
+![signin_page_design](screenshots/wire%20frame/w_signin.png)
+![signup_page_design](screenshots/wire%20frame/w_signup.png)
+![searchbook_design](screenshots/wire%20frame/w_searchbook.png)
+![my_borows_design](screenshots/wire%20frame/w_borrows.png)
 
 ### Entity Relationship Diagram (ERD)
 
-![ER_diagram](screenshort/ER_diagram.jpg)
+![ER_diagram](screenshots/ER_diagram.jpg)
 
 ## Authentication
 
@@ -571,15 +571,15 @@ quick manual verification of frontend changes before releasing.
 ## Validators testing(to-do)
 
 ### w3c
-![html_validation](screenshort/w3c_Validator.png)
+![html_validation](screenshots/w3c_Validator.png)
 
 ### css validator
 
-![css_validation](screenshort/css_validator.png)
+![css_validation](screenshots/css_validator.png)
 
 ### Light house report
 
-![LightHouse_Report](screenshort/lighthouse.png)
+![LightHouse_Report](screenshots/lighthouse.png)
 
 ## References
 
