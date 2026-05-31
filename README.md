@@ -24,6 +24,9 @@ The system also integrates Cloudinary for efficient cloud-based media storage
 and delivery.
 Overall, the system aims to reduce manual workload, improve record accuracy,
 and provide a structured, scalable solution for modern library management.
+![homepage_bigscreen_view](screenshort/Home_page.jpg)
+
+![home_page_small_screen_view](screenshort/mobile_view.jpg)
 
 ## Features
 
@@ -153,7 +156,9 @@ submission. This validation:
 - Improves user experience by catching conflicts early
 - Uses AJAX to communicate with the backend without page reload
 
-TODO: Add screenshot of async validation in action failed and success cases.
+![](screenshort/user_name_excisting.png)
+
+![](screenshort/user_name_validation.png)
 
 ### Browse Available Books
 
